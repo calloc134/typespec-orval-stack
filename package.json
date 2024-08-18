@@ -1,0 +1,11 @@
+{
+  "name": "typespec-test2",
+  "version": "0.1.0",
+  "type": "module",
+  "devDependencies": {
+    "@typespec/compiler": "latest",
+    "@typespec/http": "^0.59.1",
+    "@typespec/openapi3": "^0.59.1"
+  },
+  "private": true
+}
