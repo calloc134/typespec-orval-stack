@@ -1,30 +1,12 @@
 openapi: 3.0.0
 info:
-  title: (title)
+  title: TypeSpec Orval API
   version: 0.0.0
 tags: []
 paths:
-  /pets:
+  /:
     get:
-      operationId: Pets_list
-      parameters:
-        - name: filter
-          in: query
-          required: true
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Pet'
-    post:
-      operationId: Pets_create
+      operationId: Hello_hello
       parameters: []
       responses:
         '200':
@@ -32,94 +14,131 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Pet'
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                  - message
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users:
+    get:
+      operationId: Users_getUsers
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+                required:
+                  - users
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: Users_createUser
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+                required:
+                  - user
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pet'
-  /pets/{id}:
-    get:
-      operationId: Pets_read
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
+              type: object
+              properties:
+                user:
+                  $ref: '#/components/schemas/User'
+              required:
+                - user
+    patch:
+      operationId: Users_updateUser
+      parameters: []
       responses:
         '200':
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Pet'
-  /stores:
-    get:
-      operationId: Stores_list
-      parameters:
-        - name: filter
-          in: query
-          required: true
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+                required:
+                  - user
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Store'
-  /stores/{id}:
-    get:
-      operationId: Stores_read
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Store'
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  $ref: '#/components/schemas/UserUpdate'
 components:
   schemas:
-    Address:
+    Error:
       type: object
       required:
-        - street
-        - city
+        - message
       properties:
-        street:
+        message:
           type: string
-        city:
-          type: string
-    Pet:
+    User:
       type: object
       required:
-        - name
-        - age
+        - user_uuid
+        - user_name
       properties:
-        name:
+        user_uuid:
           type: string
-        age:
-          type: integer
-          format: int32
-    Store:
+        user_name:
+          type: string
+    UserUpdate:
       type: object
-      required:
-        - name
-        - address
       properties:
-        name:
+        user_uuid:
           type: string
-        address:
-          $ref: '#/components/schemas/Address'
+        user_name:
+          type: string
+servers:
+  - url: http://localhost:3777
+    description: production
+    variables: {}
