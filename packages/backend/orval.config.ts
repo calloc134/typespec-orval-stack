@@ -4,7 +4,7 @@ export default defineConfig({
   petstore: {
     output: {
       mode: "split",
-      target: "src/petstore.ts",
+      target: "src/tyorapi.ts",
       client: "hono",
       override: {
         hono: {
