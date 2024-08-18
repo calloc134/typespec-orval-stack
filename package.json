@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "devDependencies": {
+    "@types/node": "^22.4.0",
     "@typespec/compiler": "latest",
     "@typespec/http": "^0.59.1",
     "@typespec/openapi3": "^0.59.1"
