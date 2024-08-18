@@ -1,4 +1,4 @@
-import app from "./petstore";
+import app from "./tyorapi";
 import { serve } from "@hono/node-server";
 import consola from "consola";
 import color from "picocolors";
