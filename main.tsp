@@ -1,31 +1,44 @@
 import "@typespec/http";
-
+ 
 using TypeSpec.Http;
+ 
+@service({
+  title: "TypeSpec Orval API"
+  
+})
+@server("http://localhost:3777", "production")
+namespace TyOrAPI;
 
-model Pet {
-  name: string;
-  age: int32;
+@error
+model Error {
+  message: string;
 }
 
-model Store {
-  name: string;
-  address: Address;
+@route("/")
+interface Hello {
+  @get
+  hello(): {
+    message: string;
+  } |  Error;
 }
 
-model Address {
-  street: string;
-  city: string;
+model User {
+  user_uuid: string;
+  user_name: string;
 }
 
-@route("/pets")
-interface Pets {
-  list(@query filter: string): Pet[];
-  create(@body pet: Pet): Pet;
-  read(@path id: string): Pet;
-}
-
-@route("/stores")
-interface Stores {
-  list(@query filter: string): Store[];
-  read(@path id: string): Store;
+@route("/users")
+interface Users {
+  @get
+  getUsers(): {
+    users: User[];
+  } | Error;
+  @post
+  createUser(user: User): {
+    user: User;
+  } | Error;
+  @patch
+  updateUser(user: User): {
+    user: User;
+  } | Error;
 }
