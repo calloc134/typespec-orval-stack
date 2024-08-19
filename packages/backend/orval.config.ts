@@ -1,7 +1,7 @@
 import { defineConfig } from "orval";
 
 export default defineConfig({
-  petstore: {
+  tyorapi: {
     output: {
       mode: "split",
       target: "src/tyorapi.ts",
