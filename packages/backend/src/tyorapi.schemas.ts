@@ -4,38 +4,40 @@
  * TypeSpec Orval API
  * OpenAPI spec version: 0.0.0
  */
-export type UsersUpdateUser200 = {
-  user: User;
+export type PostsUpdatePost200 = {
+  post: Post;
 };
 
-export type UsersUpdateUserBody = {
-  user?: UserUpdate;
+export type PostsUpdatePostBody = {
+  post?: PostUpdate;
 };
 
-export type UsersCreateUser200 = {
-  user: User;
+export type PostsCreatePost200 = {
+  post: Post;
 };
 
-export type UsersCreateUserBody = {
-  user: User;
+export type PostsCreatePostBody = {
+  post: Post;
 };
 
-export type UsersGetUsers200 = {
-  users: User[];
+export type PostsGetPosts200 = {
+  posts: Post[];
 };
 
 export type HelloHello200 = {
   message: string;
 };
 
-export interface UserUpdate {
-  user_name?: string;
-  user_uuid?: string;
+export interface PostUpdate {
+  post_content?: string;
+  post_title?: string;
+  post_uuid?: string;
 }
 
-export interface User {
-  user_name: string;
-  user_uuid: string;
+export interface Post {
+  post_content: string;
+  post_title: string;
+  post_uuid: string;
 }
 
 export interface Error {

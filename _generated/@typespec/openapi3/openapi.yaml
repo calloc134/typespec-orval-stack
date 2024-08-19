@@ -26,9 +26,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /users:
+  /posts:
     get:
-      operationId: Users_getUsers
+      operationId: Posts_getPosts
       parameters: []
       responses:
         '200':
@@ -38,12 +38,12 @@ paths:
               schema:
                 type: object
                 properties:
-                  users:
+                  posts:
                     type: array
                     items:
-                      $ref: '#/components/schemas/User'
+                      $ref: '#/components/schemas/Post'
                 required:
-                  - users
+                  - posts
         default:
           description: An unexpected error response.
           content:
@@ -51,7 +51,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     post:
-      operationId: Users_createUser
+      operationId: Posts_createPost
       parameters: []
       responses:
         '200':
@@ -61,10 +61,10 @@ paths:
               schema:
                 type: object
                 properties:
-                  user:
-                    $ref: '#/components/schemas/User'
+                  post:
+                    $ref: '#/components/schemas/Post'
                 required:
-                  - user
+                  - post
         default:
           description: An unexpected error response.
           content:
@@ -78,12 +78,12 @@ paths:
             schema:
               type: object
               properties:
-                user:
-                  $ref: '#/components/schemas/User'
+                post:
+                  $ref: '#/components/schemas/Post'
               required:
-                - user
+                - post
     patch:
-      operationId: Users_updateUser
+      operationId: Posts_updatePost
       parameters: []
       responses:
         '200':
@@ -93,10 +93,10 @@ paths:
               schema:
                 type: object
                 properties:
-                  user:
-                    $ref: '#/components/schemas/User'
+                  post:
+                    $ref: '#/components/schemas/Post'
                 required:
-                  - user
+                  - post
         default:
           description: An unexpected error response.
           content:
@@ -110,8 +110,8 @@ paths:
             schema:
               type: object
               properties:
-                user:
-                  $ref: '#/components/schemas/UserUpdate'
+                post:
+                  $ref: '#/components/schemas/PostUpdate'
 components:
   schemas:
     Error:
@@ -121,22 +121,27 @@ components:
       properties:
         message:
           type: string
-    User:
+    Post:
       type: object
       required:
-        - user_uuid
-        - user_name
+        - post_uuid
+        - post_title
+        - post_content
       properties:
-        user_uuid:
+        post_uuid:
           type: string
-        user_name:
+        post_title:
           type: string
-    UserUpdate:
+        post_content:
+          type: string
+    PostUpdate:
       type: object
       properties:
-        user_uuid:
+        post_uuid:
           type: string
-        user_name:
+        post_title:
+          type: string
+        post_content:
           type: string
 servers:
   - url: http://localhost:3777

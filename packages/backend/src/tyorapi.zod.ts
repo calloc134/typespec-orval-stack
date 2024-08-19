@@ -11,40 +11,45 @@ export const helloHelloResponse = zod.object({
 }).strict()
 
 
-export const usersGetUsersResponse = zod.object({
-  "users": zod.array(zod.object({
-  "user_uuid": zod.string(),
-  "user_name": zod.string()
+export const postsGetPostsResponse = zod.object({
+  "posts": zod.array(zod.object({
+  "post_uuid": zod.string(),
+  "post_title": zod.string(),
+  "post_content": zod.string()
 }).strict())
 }).strict()
 
 
-export const usersCreateUserBody = zod.object({
-  "user": zod.object({
-  "user_uuid": zod.string(),
-  "user_name": zod.string()
+export const postsCreatePostBody = zod.object({
+  "post": zod.object({
+  "post_uuid": zod.string(),
+  "post_title": zod.string(),
+  "post_content": zod.string()
 })
 })
 
-export const usersCreateUserResponse = zod.object({
-  "user": zod.object({
-  "user_uuid": zod.string(),
-  "user_name": zod.string()
+export const postsCreatePostResponse = zod.object({
+  "post": zod.object({
+  "post_uuid": zod.string(),
+  "post_title": zod.string(),
+  "post_content": zod.string()
 }).strict()
 }).strict()
 
 
-export const usersUpdateUserBody = zod.object({
-  "user": zod.object({
-  "user_uuid": zod.string().optional(),
-  "user_name": zod.string().optional()
+export const postsUpdatePostBody = zod.object({
+  "post": zod.object({
+  "post_uuid": zod.string().optional(),
+  "post_title": zod.string().optional(),
+  "post_content": zod.string().optional()
 }).optional()
 })
 
-export const usersUpdateUserResponse = zod.object({
-  "user": zod.object({
-  "user_uuid": zod.string(),
-  "user_name": zod.string()
+export const postsUpdatePostResponse = zod.object({
+  "post": zod.object({
+  "post_uuid": zod.string(),
+  "post_title": zod.string(),
+  "post_content": zod.string()
 }).strict()
 }).strict()
 

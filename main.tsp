@@ -22,23 +22,46 @@ interface Hello {
   } |  Error;
 }
 
-model User {
-  user_uuid: string;
-  user_name: string;
+// model User {
+//   user_uuid: string;
+//   user_name: string;
+// }
+
+// @route("/users")
+// interface Users {
+//   @get
+//   getUsers(): {
+//     users: User[];
+//   } | Error;
+//   @post
+//   createUser(user: User): {
+//     user: User;
+//   } | Error;
+//   @patch
+//   updateUser(user: User): {
+//     user: User;
+//   } | Error;
+// }
+
+
+model Post {
+  post_uuid: string;
+  post_title: string;
+  post_content: string;
 }
 
-@route("/users")
-interface Users {
+@route("/posts")
+interface Posts {
   @get
-  getUsers(): {
-    users: User[];
+  getPosts(): {
+    posts: Post[];
   } | Error;
   @post
-  createUser(user: User): {
-    user: User;
+  createPost(post: Post): {
+    post: Post;
   } | Error;
   @patch
-  updateUser(user: User): {
-    user: User;
+  updatePost(post: Post): {
+    post: Post;
   } | Error;
 }

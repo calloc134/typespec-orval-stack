@@ -7,6 +7,13 @@
 
 export * from './error';
 export * from './helloHello200';
+export * from './post';
+export * from './postUpdate';
+export * from './postsCreatePost200';
+export * from './postsCreatePostBody';
+export * from './postsGetPosts200';
+export * from './postsUpdatePost200';
+export * from './postsUpdatePostBody';
 export * from './user';
 export * from './userUpdate';
 export * from './usersCreateUser200';

@@ -9,9 +9,9 @@ import {
 } from 'hono'
 
 import { helloHelloHandlers } from './handlers/helloHello';
-import { usersGetUsersHandlers } from './handlers/usersGetUsers';
-import { usersCreateUserHandlers } from './handlers/usersCreateUser';
-import { usersUpdateUserHandlers } from './handlers/usersUpdateUser';
+import { postsGetPostsHandlers } from './handlers/postsGetPosts';
+import { postsCreatePostHandlers } from './handlers/postsCreatePost';
+import { postsUpdatePostHandlers } from './handlers/postsUpdatePost';
 
 
 const app = new Hono()
@@ -21,15 +21,15 @@ app.get('/',...helloHelloHandlers)
 
 
 
-app.get('/users',...usersGetUsersHandlers)
+app.get('/posts',...postsGetPostsHandlers)
 
 
 
-app.post('/users',...usersCreateUserHandlers)
+app.post('/posts',...postsCreatePostHandlers)
 
 
 
-app.patch('/users',...usersUpdateUserHandlers)
+app.patch('/posts',...postsUpdatePostHandlers)
 
 
 export default app

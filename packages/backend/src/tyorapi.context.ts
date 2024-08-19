@@ -6,10 +6,10 @@
  */
 import type { Context, Env } from 'hono';
 
-import { UsersCreateUserBody,
-UsersUpdateUserBody } from './tyorapi.schemas';
+import { PostsCreatePostBody,
+PostsUpdatePostBody } from './tyorapi.schemas';
 
 export type HelloHelloContext<E extends Env = any> = Context<E, '/'>
-export type UsersGetUsersContext<E extends Env = any> = Context<E, '/users'>
-export type UsersCreateUserContext<E extends Env = any> = Context<E, '/users', { in: { json: UsersCreateUserBody, }, out: { json: UsersCreateUserBody, } }>
-export type UsersUpdateUserContext<E extends Env = any> = Context<E, '/users', { in: { json: UsersUpdateUserBody, }, out: { json: UsersUpdateUserBody, } }>
+export type PostsGetPostsContext<E extends Env = any> = Context<E, '/posts'>
+export type PostsCreatePostContext<E extends Env = any> = Context<E, '/posts', { in: { json: PostsCreatePostBody, }, out: { json: PostsCreatePostBody, } }>
+export type PostsUpdatePostContext<E extends Env = any> = Context<E, '/posts', { in: { json: PostsUpdatePostBody, }, out: { json: PostsUpdatePostBody, } }>
