@@ -7,6 +7,7 @@ export default defineConfig({
       target: "src/tyorapi.ts",
       schemas: "src/schemas",
       client: "react-query",
+      httpClient: "fetch",
       override: {
         query: {
           useSuspenseQuery: true,

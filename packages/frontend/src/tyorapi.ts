@@ -23,12 +23,6 @@ import type {
   UseSuspenseQueryOptions,
   UseSuspenseQueryResult
 } from '@tanstack/react-query'
-import * as axios from 'axios';
-import type {
-  AxiosError,
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios'
 import type {
   Error,
   HelloHello200,
@@ -41,14 +35,33 @@ import type {
 
 
 
-export const helloHello = (
-     options?: AxiosRequestConfig
- ): Promise<AxiosResponse<HelloHello200>> => {
+export type helloHelloResponse = {
+  data: HelloHello200;
+  status: number;
+}
+
+export const getHelloHelloUrl = () => {
+
+
+  return `/`
+}
+
+export const helloHello = async ( options?: RequestInit): Promise<helloHelloResponse> => {
+  
+  const res = await fetch(getHelloHelloUrl(),
+  {      
+    ...options,
+    method: 'GET'
     
-    return axios.default.get(
-      `/`,options
-    );
+    
   }
+
+  )
+  const data = await res.json()
+
+  return { status: res.status, data }
+}
+
 
 
 export const getHelloHelloQueryKey = () => {
@@ -56,16 +69,16 @@ export const getHelloHelloQueryKey = () => {
     }
 
     
-export const getHelloHelloQueryOptions = <TData = Awaited<ReturnType<typeof helloHello>>, TError = AxiosError<Error>>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof helloHello>>, TError, TData>>, axios?: AxiosRequestConfig}
+export const getHelloHelloQueryOptions = <TData = Awaited<ReturnType<typeof helloHello>>, TError = Promise<Error>>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof helloHello>>, TError, TData>>, fetch?: RequestInit}
 ) => {
 
-const {query: queryOptions, axios: axiosOptions} = options ?? {};
+const {query: queryOptions, fetch: fetchOptions} = options ?? {};
 
   const queryKey =  queryOptions?.queryKey ?? getHelloHelloQueryKey();
 
   
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof helloHello>>> = ({ signal }) => helloHello({ signal, ...axiosOptions });
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof helloHello>>> = ({ signal }) => helloHello({ signal, ...fetchOptions });
 
       
 
@@ -75,36 +88,36 @@ const {query: queryOptions, axios: axiosOptions} = options ?? {};
 }
 
 export type HelloHelloQueryResult = NonNullable<Awaited<ReturnType<typeof helloHello>>>
-export type HelloHelloQueryError = AxiosError<Error>
+export type HelloHelloQueryError = Promise<Error>
 
 
-export function useHelloHello<TData = Awaited<ReturnType<typeof helloHello>>, TError = AxiosError<Error>>(
+export function useHelloHello<TData = Awaited<ReturnType<typeof helloHello>>, TError = Promise<Error>>(
   options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof helloHello>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof helloHello>>,
           TError,
           TData
         > , 'initialData'
-      >, axios?: AxiosRequestConfig}
+      >, fetch?: RequestInit}
 
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey }
-export function useHelloHello<TData = Awaited<ReturnType<typeof helloHello>>, TError = AxiosError<Error>>(
+export function useHelloHello<TData = Awaited<ReturnType<typeof helloHello>>, TError = Promise<Error>>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof helloHello>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof helloHello>>,
           TError,
           TData
         > , 'initialData'
-      >, axios?: AxiosRequestConfig}
+      >, fetch?: RequestInit}
 
   ):  UseQueryResult<TData, TError> & { queryKey: QueryKey }
-export function useHelloHello<TData = Awaited<ReturnType<typeof helloHello>>, TError = AxiosError<Error>>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof helloHello>>, TError, TData>>, axios?: AxiosRequestConfig}
+export function useHelloHello<TData = Awaited<ReturnType<typeof helloHello>>, TError = Promise<Error>>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof helloHello>>, TError, TData>>, fetch?: RequestInit}
 
   ):  UseQueryResult<TData, TError> & { queryKey: QueryKey }
 
-export function useHelloHello<TData = Awaited<ReturnType<typeof helloHello>>, TError = AxiosError<Error>>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof helloHello>>, TError, TData>>, axios?: AxiosRequestConfig}
+export function useHelloHello<TData = Awaited<ReturnType<typeof helloHello>>, TError = Promise<Error>>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof helloHello>>, TError, TData>>, fetch?: RequestInit}
 
   ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
@@ -119,16 +132,16 @@ export function useHelloHello<TData = Awaited<ReturnType<typeof helloHello>>, TE
 
 
 
-export const getHelloHelloSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof helloHello>>, TError = AxiosError<Error>>( options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof helloHello>>, TError, TData>>, axios?: AxiosRequestConfig}
+export const getHelloHelloSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof helloHello>>, TError = Promise<Error>>( options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof helloHello>>, TError, TData>>, fetch?: RequestInit}
 ) => {
 
-const {query: queryOptions, axios: axiosOptions} = options ?? {};
+const {query: queryOptions, fetch: fetchOptions} = options ?? {};
 
   const queryKey =  queryOptions?.queryKey ?? getHelloHelloQueryKey();
 
   
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof helloHello>>> = ({ signal }) => helloHello({ signal, ...axiosOptions });
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof helloHello>>> = ({ signal }) => helloHello({ signal, ...fetchOptions });
 
       
 
@@ -138,24 +151,24 @@ const {query: queryOptions, axios: axiosOptions} = options ?? {};
 }
 
 export type HelloHelloSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof helloHello>>>
-export type HelloHelloSuspenseQueryError = AxiosError<Error>
+export type HelloHelloSuspenseQueryError = Promise<Error>
 
 
-export function useHelloHelloSuspense<TData = Awaited<ReturnType<typeof helloHello>>, TError = AxiosError<Error>>(
-  options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof helloHello>>, TError, TData>>, axios?: AxiosRequestConfig}
-
-  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey }
-export function useHelloHelloSuspense<TData = Awaited<ReturnType<typeof helloHello>>, TError = AxiosError<Error>>(
-  options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof helloHello>>, TError, TData>>, axios?: AxiosRequestConfig}
+export function useHelloHelloSuspense<TData = Awaited<ReturnType<typeof helloHello>>, TError = Promise<Error>>(
+  options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof helloHello>>, TError, TData>>, fetch?: RequestInit}
 
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey }
-export function useHelloHelloSuspense<TData = Awaited<ReturnType<typeof helloHello>>, TError = AxiosError<Error>>(
-  options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof helloHello>>, TError, TData>>, axios?: AxiosRequestConfig}
+export function useHelloHelloSuspense<TData = Awaited<ReturnType<typeof helloHello>>, TError = Promise<Error>>(
+  options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof helloHello>>, TError, TData>>, fetch?: RequestInit}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey }
+export function useHelloHelloSuspense<TData = Awaited<ReturnType<typeof helloHello>>, TError = Promise<Error>>(
+  options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof helloHello>>, TError, TData>>, fetch?: RequestInit}
 
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey }
 
-export function useHelloHelloSuspense<TData = Awaited<ReturnType<typeof helloHello>>, TError = AxiosError<Error>>(
-  options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof helloHello>>, TError, TData>>, axios?: AxiosRequestConfig}
+export function useHelloHelloSuspense<TData = Awaited<ReturnType<typeof helloHello>>, TError = Promise<Error>>(
+  options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof helloHello>>, TError, TData>>, fetch?: RequestInit}
 
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
@@ -171,14 +184,33 @@ export function useHelloHelloSuspense<TData = Awaited<ReturnType<typeof helloHel
 
 
 
-export const usersGetUsers = (
-     options?: AxiosRequestConfig
- ): Promise<AxiosResponse<UsersGetUsers200>> => {
+export type usersGetUsersResponse = {
+  data: UsersGetUsers200;
+  status: number;
+}
+
+export const getUsersGetUsersUrl = () => {
+
+
+  return `/users`
+}
+
+export const usersGetUsers = async ( options?: RequestInit): Promise<usersGetUsersResponse> => {
+  
+  const res = await fetch(getUsersGetUsersUrl(),
+  {      
+    ...options,
+    method: 'GET'
     
-    return axios.default.get(
-      `/users`,options
-    );
+    
   }
+
+  )
+  const data = await res.json()
+
+  return { status: res.status, data }
+}
+
 
 
 export const getUsersGetUsersQueryKey = () => {
@@ -186,16 +218,16 @@ export const getUsersGetUsersQueryKey = () => {
     }
 
     
-export const getUsersGetUsersQueryOptions = <TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = AxiosError<Error>>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof usersGetUsers>>, TError, TData>>, axios?: AxiosRequestConfig}
+export const getUsersGetUsersQueryOptions = <TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = Promise<Error>>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof usersGetUsers>>, TError, TData>>, fetch?: RequestInit}
 ) => {
 
-const {query: queryOptions, axios: axiosOptions} = options ?? {};
+const {query: queryOptions, fetch: fetchOptions} = options ?? {};
 
   const queryKey =  queryOptions?.queryKey ?? getUsersGetUsersQueryKey();
 
   
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof usersGetUsers>>> = ({ signal }) => usersGetUsers({ signal, ...axiosOptions });
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof usersGetUsers>>> = ({ signal }) => usersGetUsers({ signal, ...fetchOptions });
 
       
 
@@ -205,36 +237,36 @@ const {query: queryOptions, axios: axiosOptions} = options ?? {};
 }
 
 export type UsersGetUsersQueryResult = NonNullable<Awaited<ReturnType<typeof usersGetUsers>>>
-export type UsersGetUsersQueryError = AxiosError<Error>
+export type UsersGetUsersQueryError = Promise<Error>
 
 
-export function useUsersGetUsers<TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = AxiosError<Error>>(
+export function useUsersGetUsers<TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = Promise<Error>>(
   options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof usersGetUsers>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof usersGetUsers>>,
           TError,
           TData
         > , 'initialData'
-      >, axios?: AxiosRequestConfig}
+      >, fetch?: RequestInit}
 
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey }
-export function useUsersGetUsers<TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = AxiosError<Error>>(
+export function useUsersGetUsers<TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = Promise<Error>>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof usersGetUsers>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof usersGetUsers>>,
           TError,
           TData
         > , 'initialData'
-      >, axios?: AxiosRequestConfig}
+      >, fetch?: RequestInit}
 
   ):  UseQueryResult<TData, TError> & { queryKey: QueryKey }
-export function useUsersGetUsers<TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = AxiosError<Error>>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof usersGetUsers>>, TError, TData>>, axios?: AxiosRequestConfig}
+export function useUsersGetUsers<TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = Promise<Error>>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof usersGetUsers>>, TError, TData>>, fetch?: RequestInit}
 
   ):  UseQueryResult<TData, TError> & { queryKey: QueryKey }
 
-export function useUsersGetUsers<TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = AxiosError<Error>>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof usersGetUsers>>, TError, TData>>, axios?: AxiosRequestConfig}
+export function useUsersGetUsers<TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = Promise<Error>>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof usersGetUsers>>, TError, TData>>, fetch?: RequestInit}
 
   ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
@@ -249,16 +281,16 @@ export function useUsersGetUsers<TData = Awaited<ReturnType<typeof usersGetUsers
 
 
 
-export const getUsersGetUsersSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = AxiosError<Error>>( options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof usersGetUsers>>, TError, TData>>, axios?: AxiosRequestConfig}
+export const getUsersGetUsersSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = Promise<Error>>( options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof usersGetUsers>>, TError, TData>>, fetch?: RequestInit}
 ) => {
 
-const {query: queryOptions, axios: axiosOptions} = options ?? {};
+const {query: queryOptions, fetch: fetchOptions} = options ?? {};
 
   const queryKey =  queryOptions?.queryKey ?? getUsersGetUsersQueryKey();
 
   
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof usersGetUsers>>> = ({ signal }) => usersGetUsers({ signal, ...axiosOptions });
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof usersGetUsers>>> = ({ signal }) => usersGetUsers({ signal, ...fetchOptions });
 
       
 
@@ -268,24 +300,24 @@ const {query: queryOptions, axios: axiosOptions} = options ?? {};
 }
 
 export type UsersGetUsersSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof usersGetUsers>>>
-export type UsersGetUsersSuspenseQueryError = AxiosError<Error>
+export type UsersGetUsersSuspenseQueryError = Promise<Error>
 
 
-export function useUsersGetUsersSuspense<TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = AxiosError<Error>>(
-  options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof usersGetUsers>>, TError, TData>>, axios?: AxiosRequestConfig}
-
-  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey }
-export function useUsersGetUsersSuspense<TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = AxiosError<Error>>(
-  options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof usersGetUsers>>, TError, TData>>, axios?: AxiosRequestConfig}
+export function useUsersGetUsersSuspense<TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = Promise<Error>>(
+  options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof usersGetUsers>>, TError, TData>>, fetch?: RequestInit}
 
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey }
-export function useUsersGetUsersSuspense<TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = AxiosError<Error>>(
-  options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof usersGetUsers>>, TError, TData>>, axios?: AxiosRequestConfig}
+export function useUsersGetUsersSuspense<TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = Promise<Error>>(
+  options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof usersGetUsers>>, TError, TData>>, fetch?: RequestInit}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey }
+export function useUsersGetUsersSuspense<TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = Promise<Error>>(
+  options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof usersGetUsers>>, TError, TData>>, fetch?: RequestInit}
 
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey }
 
-export function useUsersGetUsersSuspense<TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = AxiosError<Error>>(
-  options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof usersGetUsers>>, TError, TData>>, axios?: AxiosRequestConfig}
+export function useUsersGetUsersSuspense<TData = Awaited<ReturnType<typeof usersGetUsers>>, TError = Promise<Error>>(
+  options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof usersGetUsers>>, TError, TData>>, fetch?: RequestInit}
 
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
@@ -301,22 +333,41 @@ export function useUsersGetUsersSuspense<TData = Awaited<ReturnType<typeof users
 
 
 
-export const usersCreateUser = (
-    usersCreateUserBody: UsersCreateUserBody, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<UsersCreateUser200>> => {
-    
-    return axios.default.post(
-      `/users`,
-      usersCreateUserBody,options
-    );
+export type usersCreateUserResponse = {
+  data: UsersCreateUser200;
+  status: number;
+}
+
+export const getUsersCreateUserUrl = () => {
+
+
+  return `/users`
+}
+
+export const usersCreateUser = async (usersCreateUserBody: UsersCreateUserBody, options?: RequestInit): Promise<usersCreateUserResponse> => {
+  
+  const res = await fetch(getUsersCreateUserUrl(),
+  {      
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(
+      usersCreateUserBody,)
   }
 
+  )
+  const data = await res.json()
+
+  return { status: res.status, data }
+}
 
 
-export const getUsersCreateUserMutationOptions = <TError = AxiosError<Error>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof usersCreateUser>>, TError,{data: UsersCreateUserBody}, TContext>, axios?: AxiosRequestConfig}
+
+
+export const getUsersCreateUserMutationOptions = <TError = Promise<Error>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof usersCreateUser>>, TError,{data: UsersCreateUserBody}, TContext>, fetch?: RequestInit}
 ): UseMutationOptions<Awaited<ReturnType<typeof usersCreateUser>>, TError,{data: UsersCreateUserBody}, TContext> => {
-const {mutation: mutationOptions, axios: axiosOptions} = options ?? {};
+const {mutation: mutationOptions, fetch: fetchOptions} = options ?? {};
 
       
 
@@ -324,7 +375,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?? {};
       const mutationFn: MutationFunction<Awaited<ReturnType<typeof usersCreateUser>>, {data: UsersCreateUserBody}> = (props) => {
           const {data} = props ?? {};
 
-          return  usersCreateUser(data,axiosOptions)
+          return  usersCreateUser(data,fetchOptions)
         }
 
         
@@ -334,10 +385,10 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?? {};
 
     export type UsersCreateUserMutationResult = NonNullable<Awaited<ReturnType<typeof usersCreateUser>>>
     export type UsersCreateUserMutationBody = UsersCreateUserBody
-    export type UsersCreateUserMutationError = AxiosError<Error>
+    export type UsersCreateUserMutationError = Promise<Error>
 
-    export const useUsersCreateUser = <TError = AxiosError<Error>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof usersCreateUser>>, TError,{data: UsersCreateUserBody}, TContext>, axios?: AxiosRequestConfig}
+    export const useUsersCreateUser = <TError = Promise<Error>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof usersCreateUser>>, TError,{data: UsersCreateUserBody}, TContext>, fetch?: RequestInit}
 ): UseMutationResult<
         Awaited<ReturnType<typeof usersCreateUser>>,
         TError,
@@ -350,22 +401,41 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?? {};
       return useMutation(mutationOptions);
     }
     
-export const usersUpdateUser = (
-    usersUpdateUserBody: UsersUpdateUserBody, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<UsersUpdateUser200>> => {
-    
-    return axios.default.patch(
-      `/users`,
-      usersUpdateUserBody,options
-    );
+export type usersUpdateUserResponse = {
+  data: UsersUpdateUser200;
+  status: number;
+}
+
+export const getUsersUpdateUserUrl = () => {
+
+
+  return `/users`
+}
+
+export const usersUpdateUser = async (usersUpdateUserBody: UsersUpdateUserBody, options?: RequestInit): Promise<usersUpdateUserResponse> => {
+  
+  const res = await fetch(getUsersUpdateUserUrl(),
+  {      
+    ...options,
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(
+      usersUpdateUserBody,)
   }
 
+  )
+  const data = await res.json()
+
+  return { status: res.status, data }
+}
 
 
-export const getUsersUpdateUserMutationOptions = <TError = AxiosError<Error>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof usersUpdateUser>>, TError,{data: UsersUpdateUserBody}, TContext>, axios?: AxiosRequestConfig}
+
+
+export const getUsersUpdateUserMutationOptions = <TError = Promise<Error>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof usersUpdateUser>>, TError,{data: UsersUpdateUserBody}, TContext>, fetch?: RequestInit}
 ): UseMutationOptions<Awaited<ReturnType<typeof usersUpdateUser>>, TError,{data: UsersUpdateUserBody}, TContext> => {
-const {mutation: mutationOptions, axios: axiosOptions} = options ?? {};
+const {mutation: mutationOptions, fetch: fetchOptions} = options ?? {};
 
       
 
@@ -373,7 +443,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?? {};
       const mutationFn: MutationFunction<Awaited<ReturnType<typeof usersUpdateUser>>, {data: UsersUpdateUserBody}> = (props) => {
           const {data} = props ?? {};
 
-          return  usersUpdateUser(data,axiosOptions)
+          return  usersUpdateUser(data,fetchOptions)
         }
 
         
@@ -383,10 +453,10 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?? {};
 
     export type UsersUpdateUserMutationResult = NonNullable<Awaited<ReturnType<typeof usersUpdateUser>>>
     export type UsersUpdateUserMutationBody = UsersUpdateUserBody
-    export type UsersUpdateUserMutationError = AxiosError<Error>
+    export type UsersUpdateUserMutationError = Promise<Error>
 
-    export const useUsersUpdateUser = <TError = AxiosError<Error>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof usersUpdateUser>>, TError,{data: UsersUpdateUserBody}, TContext>, axios?: AxiosRequestConfig}
+    export const useUsersUpdateUser = <TError = Promise<Error>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof usersUpdateUser>>, TError,{data: UsersUpdateUserBody}, TContext>, fetch?: RequestInit}
 ): UseMutationResult<
         Awaited<ReturnType<typeof usersUpdateUser>>,
         TError,
