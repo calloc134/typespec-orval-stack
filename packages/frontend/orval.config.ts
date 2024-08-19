@@ -4,8 +4,8 @@ export default defineConfig({
   tyorapi: {
     output: {
       mode: "split",
-      target: "src/tyorapi.ts",
-      schemas: "src/schemas",
+      target: "src/hooks/query/query.ts",
+      schemas: "src/types",
       client: "react-query",
       httpClient: "fetch",
       override: {
