@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@orval/hono": "^7.0.1",
+    "dbmate": "^2.20.0",
     "esbuild": "^0.23.1",
     "orval": "^7.0.1",
     "tsx": "^4.17.0"
