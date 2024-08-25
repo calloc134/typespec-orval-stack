@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-router";
 import { Layout } from "./components/Layout";
 import { Hello } from "./features/hello/pages/Hello";
+import { Index } from "./features/index/pages/Index";
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -15,13 +16,19 @@ const rootRoute = createRootRoute({
   ),
 });
 
+const indexRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/",
+  component: () => <Index />,
+});
+
 const helloRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/hello",
   component: () => <Hello />,
 });
 
-const routeTree = rootRoute.addChildren([helloRoute]);
+const routeTree = rootRoute.addChildren([indexRoute, helloRoute]);
 
 export const router = createRouter({ routeTree });
 
