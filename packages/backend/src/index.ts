@@ -16,7 +16,7 @@ app_configured.use(
   })
 );
 
-app_configured.mount("/", app.fetch);
+app_configured.route("/", app);
 
 const launch = () => {
   consola.box("TypeSpec & Orval Stack Server");
