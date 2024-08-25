@@ -2,10 +2,26 @@ import app from "./tyorapi";
 import { serve } from "@hono/node-server";
 import consola from "consola";
 import color from "picocolors";
+import { cors } from "hono/cors";
+import { Hono } from "hono";
+
+const app_configured = new Hono();
+
+app_configured.use(
+  "*",
+  cors({
+    origin: "*", // とりあえず全てのリクエストを許可
+    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+app_configured.mount("/", app.fetch);
+
 const launch = () => {
   consola.box("TypeSpec & Orval Stack Server");
   serve({
-    fetch: app.fetch,
+    fetch: app_configured.fetch,
     port: 3777,
   });
 
