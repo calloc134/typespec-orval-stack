@@ -43,7 +43,7 @@ export type helloHelloResponse = {
 export const getHelloHelloUrl = () => {
 
 
-  return `/`
+  return `http://localhost:3777/`
 }
 
 export const helloHello = async ( options?: RequestInit): Promise<helloHelloResponse> => {
@@ -65,7 +65,7 @@ export const helloHello = async ( options?: RequestInit): Promise<helloHelloResp
 
 
 export const getHelloHelloQueryKey = () => {
-    return [`/`] as const;
+    return [`http://localhost:3777/`] as const;
     }
 
     
@@ -192,7 +192,7 @@ export type postsGetPostsResponse = {
 export const getPostsGetPostsUrl = () => {
 
 
-  return `/posts`
+  return `http://localhost:3777/posts`
 }
 
 export const postsGetPosts = async ( options?: RequestInit): Promise<postsGetPostsResponse> => {
@@ -214,7 +214,7 @@ export const postsGetPosts = async ( options?: RequestInit): Promise<postsGetPos
 
 
 export const getPostsGetPostsQueryKey = () => {
-    return [`/posts`] as const;
+    return [`http://localhost:3777/posts`] as const;
     }
 
     
@@ -341,7 +341,7 @@ export type postsCreatePostResponse = {
 export const getPostsCreatePostUrl = () => {
 
 
-  return `/posts`
+  return `http://localhost:3777/posts`
 }
 
 export const postsCreatePost = async (postsCreatePostBody: PostsCreatePostBody, options?: RequestInit): Promise<postsCreatePostResponse> => {
@@ -409,7 +409,7 @@ export type postsUpdatePostResponse = {
 export const getPostsUpdatePostUrl = () => {
 
 
-  return `/posts`
+  return `http://localhost:3777/posts`
 }
 
 export const postsUpdatePost = async (postsUpdatePostBody: PostsUpdatePostBody, options?: RequestInit): Promise<postsUpdatePostResponse> => {

@@ -8,6 +8,7 @@ export default defineConfig({
       schemas: "src/types",
       client: "react-query",
       httpClient: "fetch",
+      baseUrl: "http://localhost:3777",
       override: {
         query: {
           useSuspenseQuery: true,
