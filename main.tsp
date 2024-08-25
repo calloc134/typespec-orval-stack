@@ -22,28 +22,6 @@ interface Hello {
   } |  Error;
 }
 
-// model User {
-//   user_uuid: string;
-//   user_name: string;
-// }
-
-// @route("/users")
-// interface Users {
-//   @get
-//   getUsers(): {
-//     users: User[];
-//   } | Error;
-//   @post
-//   createUser(user: User): {
-//     user: User;
-//   } | Error;
-//   @patch
-//   updateUser(user: User): {
-//     user: User;
-//   } | Error;
-// }
-
-
 model Post {
   post_uuid: string;
   post_title: string;
