@@ -79,10 +79,19 @@ paths:
               type: object
               properties:
                 post:
-                  $ref: '#/components/schemas/Post'
+                  type: object
+                  required:
+                    - post_title
+                    - post_content
+                  properties:
+                    post_title:
+                      type: string
+                    post_content:
+                      type: string
+                  description: The template for omitting properties.
               required:
                 - post
-    patch:
+    put:
       operationId: Posts_updatePost
       parameters: []
       responses:
@@ -111,7 +120,9 @@ paths:
               type: object
               properties:
                 post:
-                  $ref: '#/components/schemas/PostUpdate'
+                  $ref: '#/components/schemas/Post'
+              required:
+                - post
 components:
   schemas:
     Error:
@@ -127,15 +138,6 @@ components:
         - post_uuid
         - post_title
         - post_content
-      properties:
-        post_uuid:
-          type: string
-        post_title:
-          type: string
-        post_content:
-          type: string
-    PostUpdate:
-      type: object
       properties:
         post_uuid:
           type: string

@@ -35,10 +35,10 @@ interface Posts {
     posts: Post[];
   } | Error;
   @post
-  createPost(post: Post): {
+  createPost(post: OmitProperties<Post, "post_uuid">): {
     post: Post;
   } | Error;
-  @patch
+  @put
   updatePost(post: Post): {
     post: Post;
   } | Error;
