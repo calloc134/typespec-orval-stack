@@ -1,9 +1,8 @@
 import safeql from "@ts-safeql/eslint-plugin/config";
 import tseslint from "typescript-eslint";
-import hono from "@hono/eslint-config";
 
 export default tseslint.config(
-  ...tseslint.configs.recommendedTypeCheckedOnly,
+  ...tseslint.configs.recommended,
   safeql.configs.connections({
     databaseUrl:
       "postgresql://postgres@localhost:5432/tyorapi-1?sslmode=disable",
