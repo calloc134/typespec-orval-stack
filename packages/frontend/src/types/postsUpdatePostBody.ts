@@ -4,8 +4,8 @@
  * TypeSpec Orval API
  * OpenAPI spec version: 0.0.0
  */
-import type { PostUpdate } from './postUpdate';
+import type { Post } from './post';
 
 export type PostsUpdatePostBody = {
-  post?: PostUpdate;
+  post: Post;
 };

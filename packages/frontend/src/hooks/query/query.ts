@@ -417,7 +417,7 @@ export const postsUpdatePost = async (postsUpdatePostBody: PostsUpdatePostBody, 
   const res = await fetch(getPostsUpdatePostUrl(),
   {      
     ...options,
-    method: 'PATCH',
+    method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(
       postsUpdatePostBody,)

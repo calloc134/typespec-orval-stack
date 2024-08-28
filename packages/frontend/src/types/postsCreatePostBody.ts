@@ -4,8 +4,9 @@
  * TypeSpec Orval API
  * OpenAPI spec version: 0.0.0
  */
-import type { Post } from './post';
+import type { PostsCreatePostBodyPost } from './postsCreatePostBodyPost';
 
 export type PostsCreatePostBody = {
-  post: Post;
+  /** The template for omitting properties. */
+  post: PostsCreatePostBodyPost;
 };

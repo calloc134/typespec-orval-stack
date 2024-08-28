@@ -11,6 +11,7 @@ export * from './post';
 export * from './postUpdate';
 export * from './postsCreatePost200';
 export * from './postsCreatePostBody';
+export * from './postsCreatePostBodyPost';
 export * from './postsGetPosts200';
 export * from './postsUpdatePost200';
 export * from './postsUpdatePostBody';
