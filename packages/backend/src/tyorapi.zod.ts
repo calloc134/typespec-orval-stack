@@ -22,7 +22,6 @@ export const postsGetPostsResponse = zod.object({
 
 export const postsCreatePostBody = zod.object({
   "post": zod.object({
-  "post_uuid": zod.string(),
   "post_title": zod.string(),
   "post_content": zod.string()
 })
@@ -39,10 +38,10 @@ export const postsCreatePostResponse = zod.object({
 
 export const postsUpdatePostBody = zod.object({
   "post": zod.object({
-  "post_uuid": zod.string().optional(),
-  "post_title": zod.string().optional(),
-  "post_content": zod.string().optional()
-}).optional()
+  "post_uuid": zod.string(),
+  "post_title": zod.string(),
+  "post_content": zod.string()
+})
 })
 
 export const postsUpdatePostResponse = zod.object({

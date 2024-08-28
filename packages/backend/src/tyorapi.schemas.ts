@@ -9,15 +9,24 @@ export type PostsUpdatePost200 = {
 };
 
 export type PostsUpdatePostBody = {
-  post?: PostUpdate;
+  post: Post;
 };
 
 export type PostsCreatePost200 = {
   post: Post;
 };
 
+/**
+ * The template for omitting properties.
+ */
+export type PostsCreatePostBodyPost = {
+  post_content: string;
+  post_title: string;
+};
+
 export type PostsCreatePostBody = {
-  post: Post;
+  /** The template for omitting properties. */
+  post: PostsCreatePostBodyPost;
 };
 
 export type PostsGetPosts200 = {
@@ -27,12 +36,6 @@ export type PostsGetPosts200 = {
 export type HelloHello200 = {
   message: string;
 };
-
-export interface PostUpdate {
-  post_content?: string;
-  post_title?: string;
-  post_uuid?: string;
-}
 
 export interface Post {
   post_content: string;

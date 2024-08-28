@@ -29,7 +29,7 @@ app.post('/posts',...postsCreatePostHandlers)
 
 
 
-app.patch('/posts',...postsUpdatePostHandlers)
+app.put('/posts',...postsUpdatePostHandlers)
 
 
 export default app
